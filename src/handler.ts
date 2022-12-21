@@ -8,5 +8,5 @@ exports.handler = async function(event: APIGatewayProxyEventV2WithRequestContext
     */
     const [simpChin, tradChin] = decodeURI(event.rawPath).split('/').slice(2);
 
-    return JSON.stringify((simpChin === undefined || tradChin === undefined) ? {} : genPartialDict(simpChin, tradChin));
+    return (simpChin === undefined || tradChin === undefined) ? "{}" : JSON.stringify(genPartialDict(simpChin, tradChin));
 }
