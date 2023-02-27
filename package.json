@@ -4,7 +4,8 @@
   "description": "This is a port of [Teochew-Dictionary-Backend](https://github.com/paulronla/Teochew-Dictionary-Backend) \r to run on AWS Lambda and written in TypeScript. The intent is to allow \r [Teochew Pop-up Dictionary](https://github.com/paulronla/Teochew-Pop-up-Dictionary) \r to make up to 50% more \"always free\" tier requests (from 2 million to 3 million per month).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx tsc && node built/tests/test_handler.js",
+    "jest": "npx tsc && npx jest"
   },
   "repository": {
     "type": "git",

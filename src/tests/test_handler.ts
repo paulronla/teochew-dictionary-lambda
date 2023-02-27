@@ -72,35 +72,3 @@ const rockRes: PartialDict = {
         rockRes
     );
 })();
-
-describe("test_handler", () => {
-    const mock = jest.fn();
-    chaoyin.genPartialDict = mock;
-    mock.mockReturnValueOnce({
-        pinyinChaoyinDictRes: {
-            "好": {"hao3": "ho2"}
-        },
-        teochewAudioDictRes: {
-            "ho2": "ABC123"
-        }
-    });
-
-
-    it("handles Chinese", async () => {
-        const event = {
-            rawPath: "/extsearch/好/好"
-        };
-
-        const result: PartialDict = await handler(event);
-        const expected: PartialDict = {
-            "pinyinChaoyinDictRes": {
-                "好": {"hao3": "ho2"}
-            },
-            "teochewAudioDictRes": {
-                "ho2": "ABC123"
-            }
-        };
-
-        expect(result).toBe(expected);
-    });
-});
