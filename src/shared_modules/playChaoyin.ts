@@ -144,7 +144,7 @@ function chaoyinIfExists(chaoyin: string, teochewAudioDict: TeochewAudioDict) {
     return '';
 }
 
-exports.genToneSandhiSingle = function (chaoyin: string, teochewAudioDict: TeochewAudioDict) {
+export const genToneSandhiSingle = function (chaoyin: string, teochewAudioDict: TeochewAudioDict) {
     return genToneSandhi([chaoyin, 'a1'], teochewAudioDict)
             .slice(0, -3);
             //doesn't tone change the last word -- a1 is a workaround

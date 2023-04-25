@@ -26,7 +26,7 @@ when modifying any of the files.
 
 */
 
-exports.mapInvalidChars = function (chineseChars: string): string {
+export const mapInvalidChars = function (chineseChars: string): string {
     const ans: string[] = [];
 
     for (const char of chineseChars) {

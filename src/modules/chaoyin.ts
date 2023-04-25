@@ -1,10 +1,13 @@
 import { PinyinChaoyinDict, TeochewAudioDict, PartialDict } from '../types/types';
-const pinyinChaoyinDict: PinyinChaoyinDict = require('../../data/mandarin_teochew.json');
-const teochewAudioDict: TeochewAudioDict = require('../../data/chaoyin_audio_map.json');
-const { genToneSandhiSingle } = require('../shared_modules/playChaoyin');
-const { mapInvalidChars } = require('../shared_modules/genChaoyin');
+import * as unTypedPinyinChaoyinDict from '../data/mandarin_teochew.json';
+import * as unTypedTeochewAudioDict from '../data/chaoyin_audio_map.json';
+import { genToneSandhiSingle } from '../shared_modules/playChaoyin.js';
+import { mapInvalidChars } from '../shared_modules/genChaoyin.js';
 
-exports.genPartialDict = function (simpChin: string, tradChin: string) {
+const pinyinChaoyinDict: PinyinChaoyinDict = unTypedPinyinChaoyinDict;
+const teochewAudioDict: TeochewAudioDict = unTypedTeochewAudioDict;
+
+export const genPartialDict = function (simpChin: string, tradChin: string) {
     const partialPinyinChaoyinDict: PinyinChaoyinDict = genPartialPinyinChaoyinDict(simpChin, tradChin);
     const partialTeochewAudioDict: TeochewAudioDict = genPartialTeochewAudioDict(partialPinyinChaoyinDict);
     
