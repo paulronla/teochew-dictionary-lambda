@@ -1,4 +1,4 @@
-import { APIGatewayEventRequestContextV2, APIGatewayProxyEventV2WithRequestContext } from "aws-lambda";
+import { handlerEvent as baseEvent } from './stubs/stubs.js';
 import { handler } from '../handler.js';
 import { PartialDict } from '../types/types';
 import { strict as assert } from 'assert';
@@ -30,37 +30,10 @@ const helloWorldRes: PartialDict = {
     },
 };
 
-const handlerEvent: APIGatewayProxyEventV2WithRequestContext<APIGatewayEventRequestContextV2> = {
-    rawPath: "",
-    version: "",
-    routeKey: "",
-    rawQueryString: "",
-    headers: {},
-    requestContext: {
-        accountId: "",
-        apiId: "",
-        domainName: "",
-        domainPrefix: "",
-        http: {
-            method: "",
-            path: "",
-            protocol: "",
-            sourceIp: "",
-            userAgent: ""
-        },
-        requestId: "",
-        routeKey: "",
-        stage: "",
-        time: "",
-        timeEpoch: 0
-    },
-    isBase64Encoded: false
-};
-
 (async () => {
-    assert.deepStrictEqual(await handler({ ...handlerEvent, rawPath: "/extsearch/"}), "{}");
+    assert.deepStrictEqual(await handler({ ...baseEvent, rawPath: "/extsearch/"}), "{}");
     assert.deepStrictEqual(
-        JSON.parse(await handler({ ...handlerEvent, rawPath: "/extsearch/你好世界/你好世界" })), 
+        JSON.parse(await handler({ ...baseEvent, rawPath: "/extsearch/你好世界/你好世界" })), 
         helloWorldRes
     );
 })();
@@ -77,7 +50,7 @@ const familyNameRes: PartialDict = {
 
 (async () => {
     assert.deepStrictEqual(
-        JSON.parse(await handler({ ...handlerEvent, rawPath: "/extsearch/罗/羅" })), 
+        JSON.parse(await handler({ ...baseEvent, rawPath: "/extsearch/罗/羅" })), 
         familyNameRes
     );
 })();
@@ -94,7 +67,7 @@ const rockRes: PartialDict = {
 
 (async () => {
     assert.deepStrictEqual(
-        JSON.parse(await handler({ ...handlerEvent, rawPath: "/extsearch/𬒈/礐" })), 
+        JSON.parse(await handler({ ...baseEvent, rawPath: "/extsearch/𬒈/礐" })), 
         rockRes
     );
 })();

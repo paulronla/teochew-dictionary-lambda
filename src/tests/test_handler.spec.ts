@@ -1,13 +1,17 @@
 import { PartialDict } from '../types/types';
 import { jest, describe, it, expect } from '@jest/globals';
+import { handlerEvent as baseEvent } from './stubs/stubs';
+
+type ChaoyinType = typeof import("../modules/chaoyin");
+jest.mock<ChaoyinType>("../modules/chaoyin");
+import { genPartialDict as genPartialDictMock } from '../modules/chaoyin';
+import { handler } from '../handler';
+
+const genPartialDict = jest.mocked(genPartialDictMock);
 
 describe("test_handler", () => {
     it("handles Chinese", async () => {
-        jest.mock("../modules/chaoyin");
-        const chaoyin = require('../modules/chaoyin');
-        const { handler } = require('../handler');
-
-        chaoyin.genPartialDict.mockReturnValueOnce({
+        genPartialDict.mockReturnValueOnce({
             pinyinChaoyinDictRes: {
                 "好": {"hao3": "ho2"}
             },
@@ -16,11 +20,7 @@ describe("test_handler", () => {
             }
         });
 
-        const event = {
-            rawPath: "/extsearch/好/好"
-        };
-
-        const result: string = await handler(event);
+        const result: string = await handler({ ...baseEvent, rawPath: "/extsearch/好/好" });
         const expected: PartialDict = {
             "pinyinChaoyinDictRes": {
                 "好": {"hao3": "ho2"}
