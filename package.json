@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/paulronla/teochew-dictionary-lambda#readme",
   "jest": {
-    "roots": ["./built/tests/"]
+    "roots": [
+      "./built/tests/"
+    ]
   },
   "devDependencies": {
     "@jest/globals": "^29.3.1",
@@ -26,5 +28,9 @@
     "@types/node": "^18.11.17",
     "jest": "^29.3.1",
     "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "graphql": "^16.6.0",
+    "graphql-type-json": "^0.3.2"
   }
 }

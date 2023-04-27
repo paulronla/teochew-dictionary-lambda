@@ -31,7 +31,7 @@ const helloWorldRes: PartialDict = {
 };
 
 (async () => {
-    assert.deepStrictEqual(await handler({ ...baseEvent, rawPath: "/extsearch/"}), "{}");
+    assert.equal(await handler({ ...baseEvent, rawPath: "/extsearch/"}), "{}");
     assert.deepStrictEqual(
         JSON.parse(await handler({ ...baseEvent, rawPath: "/extsearch/你好世界/你好世界" })), 
         helloWorldRes

@@ -1,5 +1,5 @@
 import { APIGatewayEventRequestContextV2, APIGatewayProxyEventV2WithRequestContext } from "aws-lambda";
-import { genPartialDict } from './modules/chaoyin';
+import teochewGraphql from './modules/teochewGraphql';
 
 export const handler = async function(event: APIGatewayProxyEventV2WithRequestContext<APIGatewayEventRequestContextV2>): Promise<string> {
     /*
@@ -8,5 +8,5 @@ export const handler = async function(event: APIGatewayProxyEventV2WithRequestCo
     */
     const [simpChin, tradChin] = decodeURI(event.rawPath).split('/').slice(2);
 
-    return (simpChin === undefined || tradChin === undefined) ? "{}" : JSON.stringify(genPartialDict(simpChin, tradChin));
+    return (simpChin === undefined || tradChin === undefined) ? "{}" : JSON.stringify(await teochewGraphql(simpChin, tradChin));
 }
