@@ -46,11 +46,23 @@ const TEOCHEW_QUERY: string = `
     }
 `;
 
-export default async function teochewGraphql(simpChin: string, tradChin: string) {
+export async function teochewGraphql_GET(simpChin: string, tradChin: string) {
     return (await graphql({
         schema: TEOCHEW_SCHEMA,
         source: TEOCHEW_QUERY,
         rootValue: TEOCHEW_RESOLVERS,
         variableValues: { simpChin, tradChin },
     })).data?.genPartialDict;
+};
+
+export async function teochewGraphql_POST({ query, variables }: {
+    query: string,
+    variables: { simpChin: string, tradChin: string },
+}) {
+    return (await graphql({
+        schema: TEOCHEW_SCHEMA,
+        source: query,
+        rootValue: TEOCHEW_RESOLVERS,
+        variableValues: variables,
+    }))
 };

@@ -4,7 +4,7 @@ import { jest, describe, it, expect } from '@jest/globals';
 type ChaoyinType = typeof import("../../modules/chaoyin");
 jest.mock<ChaoyinType>("../../modules/chaoyin");
 import { genPartialDict as genPartialDictMock } from '../../modules/chaoyin';
-import teochewGraphql from "../../modules/teochewGraphql";
+import { teochewGraphql_GET } from "../../modules/teochewGraphql";
 
 const genPartialDict = jest.mocked(genPartialDictMock);
 
@@ -19,7 +19,7 @@ describe("test_teochewGraphql", () => {
             }
         });
 
-        const result = await teochewGraphql('好', '好');
+        const result = await teochewGraphql_GET('好', '好');
         const expected: PartialDict = {
             "pinyinChaoyinDictRes": {
                 "好": {"hao3": "ho2"}
